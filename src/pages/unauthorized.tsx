@@ -1,10 +1,7 @@
 import Head from "next/head";
-import Button from '@mui/material/Button';
-import { useRouter } from "next/router";
+import HomeButton from "~/components/HomeButton";
 
 export default function Unauthorized() {
-  const router = useRouter();
-
   return (
     <>
       <Head>
@@ -21,9 +18,7 @@ export default function Unauthorized() {
             <div className="flex flex-col gap-2 w-full">
               Oops! You do not have permission to view this page
             </div>
-            <div className="flex justify-center w-full">
-              <Button onClick={() => router.push("/")} variant="contained">Go home</Button>
-            </div>
+            <HomeButton />
           </div>
         </div>
       </main>
