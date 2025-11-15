@@ -14,6 +14,7 @@ import { getServerSession } from "next-auth";
 import { authConfig as authOptions } from "~/server/auth/config";
 import { useEffect, useState } from "react";
 import AdminSignUp from "~/components/AdminSignUp";
+import NextGameweek from "~/components/NextGameweek";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
@@ -92,7 +93,10 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-start bg-white">
         <div className="container flex flex-col items-start justify-center gap-10 px-6 py-16">
           {/* Header */}
-          <h1 className="text-xl font-bold">ECSS London FC - Signup ⚽</h1>
+          <div className="flex flex-col gap-4">
+            <h1 className="text-xl font-bold">ECSS London FC - Signup ⚽</h1>
+            <NextGameweek />
+          </div>
 
           {/* Control */}
           <div className="flex flex-col gap-4 w-full">
