@@ -1,12 +1,14 @@
 import { api } from "~/utils/api";
 import { useToast } from "./toasts/UseToast";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface Props {
   sessionUserId: string,
@@ -18,6 +20,7 @@ export default function AdminSignUp({
   onSuccess
 }: Props) {
   const { toast } = useToast();
+  const router = useRouter();
 
   const [name, setName] = useState<string>("");
   const [id, setId] = useState<string>("");
@@ -65,7 +68,13 @@ export default function AdminSignUp({
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-1 w-full">
-        <p className="text-lg font-semibold">Admin</p>
+        {/* Heading */}
+        <div className="flex flex-row w-full justify-between">
+          <p className="text-lg font-semibold">Admin</p>
+          <SettingsIcon className="hover:text-gray-600 cursor-pointer" onClick={() => router.push("/settings")} />
+        </div>
+
+        {/* Main */}
         <FormControl fullWidth>
           <InputLabel id="other-select">Sign up someone else</InputLabel>
           <Select
