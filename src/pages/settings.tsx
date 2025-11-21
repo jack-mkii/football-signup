@@ -4,7 +4,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { type SelectChangeEvent } from '@mui/material/Select';
-import CancelIcon from '@mui/icons-material/Cancel';
 
 import { api } from "~/utils/api";
 import { Toaster } from "~/components/toasts/Toaster";
@@ -15,7 +14,6 @@ import { getServerSession } from "next-auth";
 import { authConfig as authOptions } from "~/server/auth/config";
 import { useEffect, useState } from "react";
 import {type User } from "~/server/db/schema";
-import { useRouter } from "next/router";
 import Admin from "~/components/Admin";
 import HomeButton from "~/components/HomeButton";
 
@@ -49,7 +47,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default function Settings() {
   const { toast } = useToast();
-  const router = useRouter();
 
   const [admins, setAdmins] = useState<User[]>([]);
   const [name, setName] = useState<string>("");

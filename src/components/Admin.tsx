@@ -21,7 +21,6 @@ export default function Admin({
         title: "Success",
         description: "Successfully removed user as admin",
       });
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       onRemove();
     },
     onError: (e) => {

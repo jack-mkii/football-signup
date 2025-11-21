@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { nextDay, set, format } from 'date-fns';
+import { nextDay, set } from 'date-fns';
 import { formatInTimeZone, toZonedTime } from 'date-fns-tz';
 
 export default function NextGameweek() {
