@@ -10,6 +10,7 @@ import {
   users,
   verificationTokens,
 } from "~/server/db/schema";
+import * as userRepository from "~/server/repository/userRepository";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -49,13 +50,39 @@ export const authConfig = {
     verificationTokensTable: verificationTokens,
   }) as Adapter,
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-        isAdmin: user.isAdmin,
-      },
-    }),
+    async session({ session, user }) {
+      if (session.user) {
+        session.user.id = user.id;
+        session.user.isAdmin = user.isAdmin; 
+      }
+
+      const userCount = (await userRepository.getAll()).length;
+        
+      if (userCount === 1 && !user.isAdmin) {
+        console.log('Setting first user admin');
+        await userRepository.update({
+          id: user.id,
+          isAdmin: true
+        });
+
+        session.user.isAdmin = true;
+      }
+
+      return session; 
+    },
+    async redirect({ url, baseUrl }) {
+      const devtoolsPath = '/.well-known/appspecific/com.chrome.devtools.json';
+      
+      if (url.includes(devtoolsPath)) {
+        console.log(`[AUTH-FIX] Blocking redirect to DevTools URL: ${url}. Forcing to ${baseUrl}`);
+        return baseUrl;
+      }
+      
+      if (url.startsWith(baseUrl)) {
+        return url;
+      }
+      
+      return baseUrl;
+    },
   },
 } satisfies NextAuthOptions;
