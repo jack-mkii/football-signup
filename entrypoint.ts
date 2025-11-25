@@ -13,7 +13,7 @@ const startup = async () => {
   const nextArgs = [
       'next', 
       nextCommand, 
-      ...(nextCommand === 'dev' ? ['--turbo'] : []) // Only add --turbo for dev
+      // ...(nextCommand === 'dev' ? ['--turbo'] : []) // Only add --turbo for dev
   ];
 
   console.log(`--- Starting application (Mode: ${nextCommand.toUpperCase()}) ---`);
