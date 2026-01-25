@@ -19,6 +19,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    INTERNAL_API_KEY: z.string(),
   },
 
   /**
@@ -42,6 +43,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     PGBOSS_URL: process.env.PGBOSS_URL,
     NODE_ENV: process.env.NODE_ENV,
+    INTERNAL_API_KEY: process.env.INTERNAL_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
